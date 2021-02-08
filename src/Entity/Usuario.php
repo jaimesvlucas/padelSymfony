@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -53,6 +55,19 @@ class Usuario implements UserInterface
      * @ORM\Column(type="string", length=200, nullable=true)
      */
     private $foto;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reserva::class, mappedBy="usuario", orphanRemoval=true)
+     */
+    private $reservas;
+
+    public function __construct()
+    {
+        $this->reservas = new ArrayCollection();
+    }
+
+   
+
 
     public function getId(): ?int
     {
@@ -182,4 +197,36 @@ class Usuario implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Reserva[]
+     */
+    public function getReservas(): Collection
+    {
+        return $this->reservas;
+    }
+
+    public function addReserva(Reserva $reserva): self
+    {
+        if (!$this->reservas->contains($reserva)) {
+            $this->reservas[] = $reserva;
+            $reserva->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReserva(Reserva $reserva): self
+    {
+        if ($this->reservas->removeElement($reserva)) {
+            // set the owning side to null (unless already changed)
+            if ($reserva->getUsuario() === $this) {
+                $reserva->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

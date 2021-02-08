@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <label>Email: </label><input type="text" class="form-control" name="form[email]">
+        <label>Password: </label><input type="text" class="form-control" name="form[assword]">
+        <label>Nombre: </label><input type="text" class="form-control" name="form[nombre]">
+        <label>Apellidos: </label><input type="text" class="form-control" name="form[apellidos]">
+        <label>Telfono: </label><input type="text" class="form-control" name="form[telefono]"><br>
+        <input type="submit" class="btn btn-primary form-control" name="form[registrar]">
+    </div>
+{% endblock %}
+
