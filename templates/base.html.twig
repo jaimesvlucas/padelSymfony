@@ -2,9 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Padel!{% endblock %}</title>
         {% block stylesheets %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet"/>
         {% endblock %}
 
         {% block javascripts %}
@@ -15,21 +17,46 @@
     </head>
     <body>
         {% block body %}
-        <div class="container-fluid">
-            <h1>Reservas de Padel</h1>
-            {% if app.user %} 
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <h6>Hola {{ app.user.nombre }} {{ app.user.apellidos }}</h6>
-                    <a class="btn btn-dark" href="{{ path('app_logout') }}">Logout</a>
+                  <a class="navbar-brand" href="#">Padel Alcazar</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                      <a class="nav-link active" aria-current="page" href="{{ path('inicio') }}">Home</a>
+                      <div class="d-flex">
+                        {% if app.user %} 
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        {% else %}
+                            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                            <a class="nav-link" href="{{ path('registrar') }}">Registrarse</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            {% else %}
-                <div class="container-fluid">
-                    <a class="btn btn-dark" href="{{ path('app_login') }}">Login</a>
-                    <a class="btn btn-dark" href="{{ path('registrar') }}">Registrar</a>
+              </nav>
+            <div clas="container-fluid vh-100">
+                <div class="row justify-content-center vh-100">
+                    <div class="col-2 bg-dark vh-100 text-white" id="menu">
+                        <ul class="nav flex-column bg-dark">
+                            <li class="nav-item">
+                                <span class="nav-link">Menu</span>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link text-white" href="#">Mis reservas</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link text-white" href="#">Calendario</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-10">
+                        {% endblock %}
+                    </div>
                 </div>
-            {% endif %}
-            <hr>
-        </div>
-        {% endblock %}
+            </div>
     </body>
 </html>

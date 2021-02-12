@@ -1,7 +1,63 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello ReservasController!{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+          $( "#datepicker" ).datepicker();
+        } );
+    </script>
+{% endblock %}
 {% block body %}
     {{ parent() }}
+    <div class="container">
+        <div class="row-md">
+            <h3>Selecciona una fecha</h3>
+            <p>Date: <input type="text" id="datepicker"></p>
+        <div>
+        <div class="row-md">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Pista 1</th>
+                    <th scope="col">Pisat 2</th>
+                    <th scope="col">Pista 3</th>
+                    <th scope="col">Pista 4</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>8:00-9:00</th>
+                    <td class="bg-dark text-white"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>9:00-10:00</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>10:00-11:00</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    
 {% endblock %}
